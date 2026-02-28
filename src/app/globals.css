@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #fdf8f3;
+  --color-brand-100: #faebd7;
+  --color-brand-200: #f5d5b0;
+  --color-brand-300: #e8b97a;
+  --color-brand-400: #d4944a;
+  --color-brand-500: #c47a2e;
+  --color-brand-600: #a65f1f;
+  --color-brand-700: #8a4a1a;
+  --color-brand-800: #6d3a16;
+  --color-brand-900: #5a3014;
+
+  --color-background: #faf8f5;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f5f0eb;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
+}
+
+@layer base {
+  :root {
+    --background: #faf8f5;
+    --foreground: #1a1a1a;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/80 backdrop-blur-xl border border-black/5 shadow-xl;
+  }
+
+  .glass-card {
+    @apply bg-white/60 backdrop-blur-lg border border-black/5 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
