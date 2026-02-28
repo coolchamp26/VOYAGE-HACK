@@ -398,7 +398,7 @@ export default function Home() {
             {[
               { step: "01", title: "Tell Us Your Preferences", desc: "Enter your origin, destination, dates, budget, and travel style. Our engine personalizes everything for you." },
               { step: "02", title: "We Orchestrate the Best Trips", desc: "Our backend queries TBO's flight and hotel APIs, scores hundreds of combinations for fatigue, timing, comfort, and budget." },
-              { step: "03", title: "Pick Your Perfect Journey", desc: "Get 3–4 curated trip recommendations with confidence scores, risk insights, and one-click booking." },
+              { step: "03", title: "Pick Your Perfect Journey", desc: "Get curated trip recommendations with confidence scores, risk insights, and one-click booking." },
             ].map((item) => (
               <div key={item.step} className="text-left p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow">
                 <span className="text-4xl font-bold text-gray-200">{item.step}</span>
@@ -417,7 +417,7 @@ export default function Home() {
           <p className="text-gray-500 mt-4 leading-relaxed max-w-2xl mx-auto">
             TBO OneSearch is a recommendation-first Trip Orchestration Platform built exclusively on TBO APIs.
             Unlike traditional search engines that overwhelm you with thousands of results, we use persona-based
-            intelligence, fatigue analysis, time utilization scoring, and budget elasticity to deliver 3–4 perfectly
+            intelligence, fatigue analysis, time utilization scoring, and budget elasticity to deliver perfectly
             curated complete journeys — flights, hotels, and insights — in seconds.
           </p>
           <p className="text-gray-400 text-sm mt-8">&copy; 2026 TBO OneSearch. Built for the TBO Hackathon.</p>
