@@ -83,7 +83,7 @@ export default function Home() {
               <Compass className="w-6 h-6 text-[#1a1a1a] group-hover:rotate-45 transition-transform duration-500" />
             </div>
             <div className="flex flex-col -gap-0.5">
-              <span className="text-white font-black text-2xl tracking-tight leading-none">VOYAGE</span>
+              <span className="text-white font-black text-2xl tracking-tight leading-none">TBO</span>
               <span className="text-white/60 font-bold text-[10px] tracking-[0.2em] uppercase leading-none">OneSearch</span>
             </div>
           </div>
@@ -144,7 +144,7 @@ export default function Home() {
 
               {/* Destination */}
               <div className="flex flex-col gap-2 flex-1 min-w-[150px]">
-                <label className="text-[10px] uppercase font-bold text-gray-400 tracking-[0.15em] ml-1">To Destination</label>
+                <label className="text-[10px] uppercase font-bold text-gray-400 tracking-[0.15em] ml-1">Destination</label>
                 <div className="flex items-center gap-3 bg-gray-50/80 rounded-2xl px-4 py-3 border border-gray-100 focus-within:border-amber-400 focus-within:ring-2 focus-within:ring-amber-100 transition-all">
                   <Navigation className="w-4 h-4 text-emerald-500 shrink-0" />
                   <input
