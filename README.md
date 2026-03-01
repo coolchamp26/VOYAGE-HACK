@@ -75,11 +75,11 @@ npm install
 Create a `.env.local` file in the project root:
 
 ```env
-TBO_AIR_USERNAME=tbohackathonnew
-TBO_AIR_PASSWORD=Tboagency@123
-TBO_HOTEL_URL=http://api.tbotechnology.in/TBOHolidays_HotelAPI/search
-TBO_HOTEL_USERNAME=hackathontest
-TBO_HOTEL_PASSWORD=Hac@98147521
+TBO_AIR_USERNAME=user
+TBO_AIR_PASSWORD=pass
+TBO_HOTEL_URL=url
+TBO_HOTEL_USERNAME=user
+TBO_HOTEL_PASSWORD=pass
 ```
 
 ### 3. Run Locally
