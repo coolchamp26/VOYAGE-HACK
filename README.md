@@ -1,6 +1,7 @@
 # VOYAGE OneSearch — Trip Orchestration Platform
 
-> **Recommendation-first travel platform** that uses TBO Air & Hotel APIs to generate intelligent, complete trip recommendations — not just search results. **NOTE: There are limitations in this project due to API limitations. Some scenarios may not return desired outcomes due to limited data, which wouldn't be the case if there was sufficient data.**
+> **Recommendation-first travel platform** that uses TBO Air & Hotel APIs to generate intelligent, complete trip recommendations — not just search results. 
+> **NOTE: There are limitations in this project due to API limitations. Some scenarios may not return desired outcomes due to limited data, which wouldn't be the case if there was sufficient data.**
 
 ---
 
