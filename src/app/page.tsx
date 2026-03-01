@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search, MapPin, Calendar, Users, Wallet, Activity, ShieldCheck, Heart, Sparkles, Navigation, Info } from "lucide-react";
+import { Search, MapPin, Calendar, Users, Wallet, Activity, ShieldCheck, Heart, Sparkles, Navigation, Info, Compass } from "lucide-react";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -15,7 +15,6 @@ export default function Home() {
     returnDate: "",
     budget: "",
     groupType: "Professional",
-    age: "30",
   });
 
   useEffect(() => {
@@ -79,7 +78,15 @@ export default function Home() {
 
         {/* Nav Bar */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 pt-6 flex items-center justify-between">
-          <span className="text-white font-bold text-xl tracking-tight">TBO OneSearch</span>
+          <div className="flex items-center gap-2 group cursor-pointer transition-transform duration-300 hover:scale-[1.02]">
+            <div className="bg-white/90 backdrop-blur-sm p-2.5 rounded-2xl shadow-xl shadow-black/10 group-hover:shadow-amber-400/20 transition-all border border-white/50">
+              <Compass className="w-6 h-6 text-[#1a1a1a] group-hover:rotate-45 transition-transform duration-500" />
+            </div>
+            <div className="flex flex-col -gap-0.5">
+              <span className="text-white font-black text-2xl tracking-tight leading-none">VOYAGE</span>
+              <span className="text-white/60 font-bold text-[10px] tracking-[0.2em] uppercase leading-none">OneSearch</span>
+            </div>
+          </div>
           <div className="hidden md:flex items-center gap-2">
             {[
               { label: "How It Works", target: "how-it-works" },
@@ -471,14 +478,14 @@ export default function Home() {
       {/* About Section */}
       <div id="about-section" className="bg-[#faf8f5] py-20 border-t border-gray-100">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a]">About TBO OneSearch</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a]">About VOYAGE OneSearch</h2>
           <p className="text-gray-500 mt-4 leading-relaxed max-w-2xl mx-auto">
-            TBO OneSearch is a recommendation-first Trip Orchestration Platform built exclusively on TBO APIs.
+            VOYAGE OneSearch is a recommendation-first Trip Orchestration Platform built exclusively on TBO APIs.
             Unlike traditional search engines that overwhelm you with thousands of results, we use persona-based
             intelligence, fatigue analysis, time utilization scoring, and budget elasticity to deliver perfectly
             curated complete journeys — flights, hotels, and insights — in seconds.
           </p>
-          <p className="text-gray-400 text-sm mt-8">&copy; 2026 TBO OneSearch. Built for the TBO Hackathon.</p>
+          <p className="text-gray-400 text-sm mt-8">&copy; 2026 VOYAGE OneSearch. Built for the TBO Hackathon.</p>
         </div>
       </div>
     </main>

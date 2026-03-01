@@ -1,6 +1,6 @@
-# TBO OneSearch — Trip Orchestration Platform
+# VOYAGE OneSearch — Trip Orchestration Platform
 
-> **Recommendation-first travel platform** that uses TBO Air & Hotel APIs to generate intelligent, complete trip recommendations — not just search results.
+> **Recommendation-first travel platform** that uses TBO Air & Hotel APIs to generate intelligent, complete trip recommendations — not just search results. **NOTE: There are limitations in this project due to API limitations. Some scenarios may not return desired outcomes due to limited data, which wouldn't be the case if there was sufficient data.**
 
 ---
 
@@ -10,7 +10,7 @@ Traditional travel search engines bombard users with **thousands of disconnected
 
 ## 💡 Our Solution
 
-**TBO OneSearch** accepts minimal input (origin, destination, dates, budget, traveler type) and returns **3–4 complete, ranked trip packages** — each combining outbound flights, return flights, and hotel stays — scored intelligently on:
+**VOYAGE OneSearch** accepts minimal input (origin, destination, dates, budget, traveler type) and returns **3–4 complete, ranked trip packages** — each combining outbound flights, return flights, and hotel stays — scored intelligently on:
 
 - 💰 **Budget Elasticity** — How well does it fit your wallet? What trade-offs exist?
 - 🛌 **Comfort Score** — Hotel star rating as a comfort proxy
@@ -65,7 +65,7 @@ User Input (Origin, Destination, Dates, Budget, Persona)
 ### 1. Clone & Install
 
 ```bash
-cd tbo-onesearch
+cd voyage-onesearch
 npm install
 ```
 
@@ -145,7 +145,7 @@ ConfidenceScore = (BudgetScore × BudgetWeight) + (ComfortScore × ComfortWeight
 ## 📂 Project Structure
 
 ```
-tbo-onesearch/
+voyage-onesearch/
 ├── src/
 │   └── app/
 │       ├── api/

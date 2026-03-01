@@ -111,6 +111,10 @@ function getRealisticFlights(origin: string, destination: string) {
         };
     });
 }
+// --- TBO AIR TOKEN CACHE ---
+let cachedAirToken: string | null = null;
+let airTokenExpiry: number = 0;
+const TOKEN_TTL = 30 * 60 * 1000; // 30 minutes
 
 // --- TBO AIR API (tries real, falls back to realistic demo) ---
 async function fetchTBOAirData(origin: string, destination: string, departureDate: string, returnDate: string, budget: number) {
@@ -121,24 +125,35 @@ async function fetchTBOAirData(origin: string, destination: string, departureDat
         const AIR_AUTH_URL = "http://Sharedapi.tektravels.com/SharedData.svc/rest/Authenticate";
         const AIR_SEARCH_URL = "http://api.tektravels.com/BookingEngineService_Air/AirService.svc/rest/Search/";
 
-        // Step 1: Authenticate using the correct format from TBO docs
-        const authRes = await fetch(AIR_AUTH_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                "ClientId": "ApiIntegrationNew",
-                "UserName": process.env.TBO_AIR_USERNAME || "Hackathon",
-                "Password": process.env.TBO_AIR_PASSWORD || "Hackathon@1234",
-                "EndUserIp": "192.168.10.10"
-            })
-        });
+        // Step 1: Authenticate (with caching)
+        let tokenId = cachedAirToken;
+        const now = Date.now();
 
-        if (!authRes.ok) throw new Error(`Air Auth HTTP ${authRes.status}`);
-        const authData = await authRes.json();
-        console.log("✈️ Air Auth response:", JSON.stringify(authData).substring(0, 200));
+        if (!tokenId || now > airTokenExpiry) {
+            console.log("✈️ Fetching new Air API Token...");
+            const authRes = await fetch(AIR_AUTH_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    "ClientId": "ApiIntegrationNew",
+                    "UserName": process.env.TBO_AIR_USERNAME || "Hackathon",
+                    "Password": process.env.TBO_AIR_PASSWORD || "Hackathon@1234",
+                    "EndUserIp": "192.168.10.10"
+                })
+            });
 
-        const tokenId = authData.TokenId;
-        if (!tokenId) throw new Error("No TokenId in auth response: " + JSON.stringify(authData));
+            if (!authRes.ok) throw new Error(`Air Auth HTTP ${authRes.status}`);
+            const authData = await authRes.json();
+            tokenId = authData.TokenId;
+
+            if (tokenId) {
+                cachedAirToken = tokenId;
+                airTokenExpiry = now + TOKEN_TTL;
+            }
+        }
+
+        if (!tokenId) throw new Error("No TokenId available");
+
 
         // Step 2: Search flights
         const searchRes = await fetch(AIR_SEARCH_URL, {
@@ -165,12 +180,10 @@ async function fetchTBOAirData(origin: string, destination: string, departureDat
         });
 
         const searchData = await searchRes.json();
-        console.log("✈️ Air Search status:", searchData?.Response?.Error?.ErrorMessage || "OK");
 
         if (!searchData.Response?.Results?.[0]?.length) throw new Error("No live air results — " + JSON.stringify(searchData?.Response?.Error || {}));
 
         const results = searchData.Response.Results[0];
-        console.log(`✈️ Got ${results.length} live flights from TBO Air API`);
 
         return results.slice(0, 8).map((r: any) => {
             // Outbound segment: Response.Results[0][n].Segments[0][0]
@@ -249,13 +262,11 @@ async function fetchTBOHotelData(destination: string, checkIn: string, checkOut:
         if (!searchRes.ok) throw new Error("Hotel API HTTP error: " + searchRes.statusText);
 
         const searchData = await searchRes.json();
-        console.log("🏨 Hotel API Status:", searchData?.Status?.Description);
 
         const hotelResults = searchData?.HotelSearchResult?.HotelResults;
         if (!hotelResults?.length) throw new Error("No hotel results from TBO: " + (searchData?.Status?.Description || "empty"));
 
         const nights = Math.max(1, Math.ceil((new Date(checkOut).getTime() - new Date(checkIn).getTime()) / (1000 * 3600 * 24)));
-        console.log(`🏨 Got ${hotelResults.length} live hotels from TBO Hotel API`);
 
         return hotelResults.slice(0, 12).map((h: any) => ({
             id: h.HotelCode,
@@ -403,7 +414,7 @@ export async function POST(req: Request) {
             if (uniqueTrips.length >= 6) break; // Get a few extra for tagging
         }
 
-        const topTrips = uniqueTrips.slice(0, 5);
+        const topTrips = uniqueTrips.slice(0, 4);
 
         // Decision Tagging
         const usedTags = new Set<string>();
@@ -423,7 +434,8 @@ export async function POST(req: Request) {
             return { ...trip, decisionTag: tag };
         });
 
-        return NextResponse.json({ success: true, trips: rankedTrips.slice(0, 4) });
+        return NextResponse.json({ success: true, trips: rankedTrips });
+
 
     } catch (error) {
         console.error("Orchestration error:", error);
