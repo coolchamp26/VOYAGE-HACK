@@ -1,6 +1,7 @@
-# VOYAGE OneSearch — Trip Orchestration Platform
+# TBO OneSearch — Trip Orchestration Platform
 
 > **Recommendation-first travel platform** that uses TBO Air & Hotel APIs to generate intelligent, complete trip recommendations — not just search results. 
+
 > **NOTE: There are limitations in this project due to API limitations. Some scenarios may not return desired outcomes due to limited data, which wouldn't be the case if there was sufficient data.**
 
 ---
@@ -11,7 +12,7 @@ Traditional travel search engines bombard users with **thousands of disconnected
 
 ## 💡 Our Solution
 
-**VOYAGE OneSearch** accepts minimal input (origin, destination, dates, budget, traveler type) and returns **3–4 complete, ranked trip packages** — each combining outbound flights, return flights, and hotel stays — scored intelligently on:
+**TBO OneSearch** accepts minimal input (origin, destination, dates, budget, traveler type) and returns **3–4 complete, ranked trip packages** — each combining outbound flights, return flights, and hotel stays — scored intelligently on:
 
 - 💰 **Budget Elasticity** — How well does it fit your wallet? What trade-offs exist?
 - 🛌 **Comfort Score** — Hotel star rating as a comfort proxy
@@ -195,6 +196,8 @@ voyage-onesearch/
 - AI-generated trip narratives
 - Price prediction and booking timing suggestions
 - User preference learning across sessions
+- Adding a copilot to aid users
+- Diversifying to bus, trains etc
 
 ---
 
